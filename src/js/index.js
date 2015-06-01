@@ -58,10 +58,22 @@ function getFiles(fileList){
             // 页面上显示64位图
             var pic64  = document.createElement('img');
             pic64.src = base64Img;
-            rightBox.appendChild(pic64)
+            var btn  = document.createElement('button');
+            btn.innerHTML = '点击复制图片代码';
+            btn.setAttribute('data-clipboard-text', base64Img);
+            rightBox.appendChild(pic64);
+            rightBox.appendChild(btn);
+            // 定义一个新的复制对象
+            var clip = new ZeroClipboard(btn,{
+              moviePath: "../ZeroClipboard/ZeroClipboard.swf"
+            }).on('complete', function(client, args) {
+                alert("复制成功，复制内容为："+ args.text.substr(0,22));
+            });
         }); 
     }
 }
+
+
 
 
 // 获取图片url
